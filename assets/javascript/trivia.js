@@ -110,23 +110,19 @@ function loadTrivia(){
     // var wrongOnes = triviaQuestions[random].incorrect_answers;
     // rightOne = triviaQuestions[random].correct_answer;
     var queryURL = "https://opentdb.com/api.php?amount=1&category=" + subject + "&difficulty=" + difficulty + "&type=multiple";
-    var holder =[];
-    var answers = [];
-    var question;
-
+    
     $.ajax({
         url: queryURL, 
         method: "GET"
     }).then(function(response){
         console.log(response);
-        question = response.results[0].question;
+        var question = response.results[0].question;
         var wrongOnes = response.results[0].incorrect_answers;
         rightOne = response.results[0].correct_answer;
-        holder = [wrongOnes[0], wrongOnes[1], wrongOnes[2], rightOne];
-        answers = jumbleArray(holder);
+        var holder = [wrongOnes[0], wrongOnes[1], wrongOnes[2], rightOne];
+        var answers = jumbleArray(holder);
         console.log(answers);
-    });
-    
+        
     var newList = $("<ol>");
     $(".trivia").empty();
     $(".placeholder").empty();
@@ -148,6 +144,7 @@ function loadTrivia(){
     $(".trivia").append(newList);
     stopwatch.reset();
     stopwatch.start();
+    });
 }
 
 function loadScreen(string, target){

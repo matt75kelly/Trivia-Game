@@ -72,28 +72,28 @@ function jumbleArray(array){
                 case 0:
                     if(!random[0]){
                         random[0] = true;
-                        temp[i] = array[rand];
+                        temp[i] = decodeHtml(array[rand]);
                     }
                     else i--;
                     break;
                 case 1:
                     if(!random[1]){
                         random[1] = true;
-                        temp[i] = array[rand];
+                        temp[i] = decodeHtml(array[rand]);
                     }
                     else i--;
                     break;
                 case 2:
                     if(!random[2]){
                         random[2] = true;
-                        temp[i] = array[rand];
+                        temp[i] = decodeHtml(array[rand]);
                     }
                     else i--;
                     break;
                 case 3:
                     if(!random[3]){
                         random[3] = true;
-                        temp[i] = array[rand];
+                        temp[i] = decodeHtml(array[rand]);
                     }
                     else i--;
                     break; 
@@ -101,6 +101,14 @@ function jumbleArray(array){
             
         }
     return temp;
+}
+
+function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    var text = txt.value;
+    txt.remove();
+    return text;
 }
 
 function loadTrivia(){
@@ -116,9 +124,9 @@ function loadTrivia(){
         method: "GET"
     }).then(function(response){
         console.log(response);
-        var question = response.results[0].question;
+        var question = decodeHtml(response.results[0].question);
         var wrongOnes = response.results[0].incorrect_answers;
-        rightOne = response.results[0].correct_answer;
+        rightOne = decodeHtml(response.results[0].correct_answer);
         var holder = [wrongOnes[0], wrongOnes[1], wrongOnes[2], rightOne];
         var answers = jumbleArray(holder);
         console.log(answers);
@@ -171,7 +179,7 @@ function loadScreen(string, target){
 
 /// Main Program Starts HERE-----------------------------
 $(document).ready(function(){
-
+    
     var newButton = $("<button>");
     newButton.addClass("start");
     newButton.text("Begin Trivia!")

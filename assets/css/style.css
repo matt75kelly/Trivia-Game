@@ -1,40 +1,47 @@
 body{
     font-family: 'Comfortaa', cursive;
     background: linear-gradient(cyan, yellow);
-    background-size: 100vh 100vw;
+    background-size: 100vw 100vh;
 }
 header{
     text-align: center;
     box-sizing: border-box;
-    padding: 3vh 0;
-    margin: 20vh auto 2vh auto;
+    padding: 1.5vh 0;
+    margin: 4vh auto 2vh auto;
 }
 h1{
     font-size: 3.5rem;
 }
 .question{
-    font-size: 2rem;
+    font-size: 1.9rem;
     width: 100%;
-    height: 6vh;
+    height: auto;
     text-align: center;
     margin: 2vh auto;
 }
 #triviaQuestion{
     text-align: center;
-    margin: 0 auto;
+    height: auto;
+    margin: 1vh auto;
+    display: block;
+    word-wrap: break-word;
 }
 .placeholder{
     width: 100%;
-    height: 7vh;
-    text-align: center;
+    height: fit-content;
+    margin: 1vh;
     box-sizing: border-box;
+    padding: 0 auto;
+    justify-content: center;
 }
 .start{
-    width: 60%;
-    font-size: 2rem;
-    height: 6vh;
+    width: 50%;
+    font-size: 1.8rem;
+    height: fit-content;
     text-align: center;
-    margin: 0 auto;
+}
+.trivia{
+    margin: 2vh auto;
 }
 li{
     font-style: bold;
@@ -46,11 +53,16 @@ li{
     height: 6vh;
     font-size: 1.8rem;
 }
+.infoPanel{
+    margin: 2vh auto;
+}
 .timer{
     width: 100%;
     margin: 1vh auto;
+    text-align: center;
 }
 #timerHeader{
+    width: 100%;
     font-size: 2rem;
     text-align: center;
 }

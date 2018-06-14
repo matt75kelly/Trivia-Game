@@ -155,6 +155,7 @@ function loadTrivia(){
         listItem.append(listButton);    
     }
     $("#triviaQuestion").text(question);
+    $("#triviaQuestion").attr("style", "height: fit-content");
     $(".trivia").append(newList);
     stopwatch.reset();
     stopwatch.start();

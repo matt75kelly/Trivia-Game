@@ -1,5 +1,7 @@
 body{
     font-family: 'Comfortaa', cursive;
+    background: linear-gradient(cyan, yellow);
+    background-size: 100vh 100vw;
 }
 header{
     text-align: center;
@@ -34,8 +36,13 @@ h1{
     text-align: center;
     margin: 0 auto;
 }
+li{
+    font-style: bold;
+    font-size: 1.8rem;
+    letter-spacing: .75vw;
+}
 .answer{
-    width: 90%;
+    width: 95%;
     height: 6vh;
     font-size: 1.8rem;
 }
@@ -56,7 +63,7 @@ h5{
     margin: 1vh auto;
 }
 .footer{
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 40%;
 }

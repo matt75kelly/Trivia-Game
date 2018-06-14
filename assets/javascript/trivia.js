@@ -4,7 +4,8 @@ var intervalId;
 var wins = 0;
 var losses = 0;
 var challenge = ["medium", "hard"];
-var category = [9, 17, 19, 22, 23];
+var category = [9, 17, 18, 19, 20, 22, 23, 27];
+var token = "";
 // prevents the clock from being sped up unnecessarily
 var clockRunning = false;
 
@@ -110,26 +111,31 @@ function decodeHtml(html) {
     txt.remove();
     return text;
 }
-
+function loadAjax(key){
+    token = key;
+}
+function resetToken(){
+    $.ajax({
+        url: "https://opentdb.com/api_token.php?command=reset&token=" + token,
+        method: "GET"
+    })
+}
 function loadTrivia(){
     var subject = category[Math.floor(Math.random()* category.length)];
     var difficulty = challenge[Math.floor(Math.random()* challenge.length)];
-    // var question = triviaQuestions[random].question
-    // var wrongOnes = triviaQuestions[random].incorrect_answers;
-    // rightOne = triviaQuestions[random].correct_answer;
-    var queryURL = "https://opentdb.com/api.php?amount=1&category=" + subject + "&difficulty=" + difficulty + "&type=multiple";
+    var queryURL = "https://opentdb.com/api.php?amount=1&category=" + subject + "&difficulty=" + difficulty + "&type=multiple&token=" + token;
     
     $.ajax({
         url: queryURL, 
         method: "GET"
     }).then(function(response){
-        console.log(response);
+
+        if(response.response_code == 4) resetToken();
         var question = decodeHtml(response.results[0].question);
         var wrongOnes = response.results[0].incorrect_answers;
         rightOne = decodeHtml(response.results[0].correct_answer);
         var holder = [wrongOnes[0], wrongOnes[1], wrongOnes[2], rightOne];
         var answers = jumbleArray(holder);
-        console.log(answers);
         
     var newList = $("<ol>");
     $(".trivia").empty();
@@ -184,6 +190,12 @@ $(document).ready(function(){
     newButton.addClass("start");
     newButton.text("Begin Trivia!")
     $(".placeholder").append(newButton);
+    $.ajax({
+        url: "https://opentdb.com/api_token.php?command=request",
+        method: "GET"
+    }).then(function(response){
+        loadAjax(response.token);
+    });
 
 $(".start").on("click", function(){
     $(".start").remove();
